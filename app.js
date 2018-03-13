@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const express = require("express");
 const flash = require("connect-flash");
+const http = require("http");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
@@ -63,3 +64,7 @@ app.use("/bookings", bookingRouter);
 app.listen(process.env.PORT || 5000, process.env.IP, () => {
 	console.log("Vivlia Server has Started!", process.env.PORT || 5000);
 });
+
+setInterval(() => {
+	http.get("http://vivlia.herokuapp.com");
+}, 300000);
