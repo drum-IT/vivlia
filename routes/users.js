@@ -17,19 +17,8 @@ userRouter.get("/:user_id", middleware.isLoggedIn, (req, res) => {
 	});
 });
 
-userRouter.get("/:user_id/getAPISecret", (req, res) => {
-	User.findById(req.params.user_id, (err, foundUser) => {
-		if (err) {
-			req.flash("error", "error retrieving user api secret");
-			res.redirect("/");
-		} else {
-			res.send({ key: foundUser.apiSecret });
-		}
-	});
-});
-
 userRouter.get("/:user_id/getNewKeys", middleware.isLoggedIn, (req, res) => {
-	User.findById(req.params.user_id, (err, foundUser) => {
+	User.findById(req.user.id, (err, foundUser) => {
 		if (err) {
 			req.flash("error", "error getting new api keys");
 			res.redirect("/");
@@ -45,7 +34,7 @@ userRouter.get("/:user_id/getNewKeys", middleware.isLoggedIn, (req, res) => {
 					req.flash("error", "There was an error saving the user.");
 					res.redirect("/");
 				} else {
-					res.send({ key: savedUser.apiKey, secret: savedUser.apiSecret });
+					res.render("users/show", { foundUser: savedUser, key: savedUser.apiKey, secret: savedUser.apiSecret });
 				}
 			});
 		}

@@ -9,31 +9,16 @@
 					<%= foundUser.apiKey %>
 				</span>
 			</p>
-			<p>API Secret:
-				<span id="api-secret">
-					<button id="reveal-key">Reveal</button>
-				</span>
-			</p>
+			<form action="/users/<%= user.id %>/getAPISecret">
+				<label>API Secret:</label>
+				<%= foundUser.apiSecret %>
+			</form>
 			<p>
-				<button id="new-keys">Generate New API Keys</button>
+				<form action="/users/<%= user.id %>/getNewKeys">
+					<button id="new-keys">Generate New API Keys</button>
+				</form>
 			</p>
 		</div>
 		<div class="col-md-8"> </div>
 	</div>
-	<script>
-		const getKey = document.getElementById("reveal-key").addEventListener("click", getAPISecret);
-		const newKey = document.getElementById("new-keys").addEventListener("click", getNewKeys);
-		const keyField = document.getElementById("api-key");
-		const secretField = document.getElementById("api-secret");
-		async function getNewKeys() {
-			const data = await (await fetch("/users/<%= user.id %>/getNewKeys")).json();
-			keyField.innerHTML = data.key;
-			secretField.innerHTML = data.secret;
-		}
-		async function getAPISecret() {
-			const data = await (await fetch("/users/<%= user.id %>/getAPISecret")).json();
-			secretField.innerHTML = data.key;
-		}
-
-	</script>
 	<% include ../partials/footer %>
