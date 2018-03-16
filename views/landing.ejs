@@ -1,2 +1,20 @@
 <% include ./partials/header %>
-<% include ./partials/footer %>
+	<div class="booking__list">
+		<% foundBookings.forEach(booking => { %>
+			<div class="booking">
+				<p>
+					<%= booking.guestName %>
+				</p>
+				<p>
+					<%= moment(booking.checkInTime).format('MMMM Do YYYY, h:mm:ss a'); %>
+				</p>
+				<p>
+					<%= moment(booking.checkOutTime).format('MMMM Do YYYY, h:mm:ss a'); %>
+				</p>
+				<p>
+					<%= booking.lengthOfStay %>
+				</p>
+			</div>
+			<% }); %>
+	</div>
+	<% include ./partials/footer %>

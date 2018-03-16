@@ -1,11 +1,39 @@
 <% include ../partials/header %>
-  <div class="row">
-    <div class="col-md-4">
-      <h1>
-        <%= foundUser.username %>
-      </h1>
-    </div>
-    <div class="col-md-8">
-    </div>
-  </div>
-<% include ../partials/footer %>
+	<div class="row">
+		<div class="col-md-4">
+			<h1>
+				<%= foundUser.username %>
+			</h1>
+			<p>API Key:
+				<span id="api-key">
+					<%= foundUser.apiKey %>
+				</span>
+			</p>
+			<p>API Secret:
+				<span id="api-secret">
+					<button id="reveal-key">Reveal</button>
+				</span>
+			</p>
+			<p>
+				<button id="new-keys">Generate New API Keys</button>
+			</p>
+		</div>
+		<div class="col-md-8"> </div>
+	</div>
+	<script>
+		const getKey = document.getElementById("reveal-key").addEventListener("click", getAPISecret);
+		const newKey = document.getElementById("new-keys").addEventListener("click", getNewKeys);
+		const keyField = document.getElementById("api-key");
+		const secretField = document.getElementById("api-secret");
+		async function getNewKeys() {
+			const data = await (await fetch("/users/<%= user.id %>/getNewKeys")).json();
+			keyField.innerHTML = data.key;
+			secretField.innerHTML = data.secret;
+		}
+		async function getAPISecret() {
+			const data = await (await fetch("/users/<%= user.id %>/getAPISecret")).json();
+			secretField.innerHTML = data.key;
+		}
+
+	</script>
+	<% include ../partials/footer %>

@@ -6,7 +6,16 @@ const BookingSchema = new mongoose.Schema({
 	checkOutDate: Date,
 	checkOutTime: Number,
 	guestName: String,
-	lengthOfStay: Number
+	lengthOfStay: Number,
+	numberOfGuests: Number,
+	note: String,
+	user: {
+		id: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User"
+		},
+		username: String
+	},
 });
 
 module.exports = mongoose.model("Booking", BookingSchema);

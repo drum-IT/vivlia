@@ -1,6 +1,8 @@
 const express = require("express");
 const bookingRouter = express.Router();
 const Booking = require("../models/booking");
+const User = require("../models/user");
+const middleware = require("../middleware");
 
 bookingRouter.get("/", (req, res) => {
 	Booking.find({}, (err, foundBookings) => {
@@ -12,13 +14,27 @@ bookingRouter.get("/", (req, res) => {
 	});
 });
 
-bookingRouter.post("/", (req, res) => {
-	console.log(req.body);
-	Booking.create(req.body, (err, newBooking) => {
-		if (err) {
-			console.log(err);
+bookingRouter.post("/", middleware.checkAPIKeys, (req, res) => {
+	const newBooking = req.body;
+	const user = {
+		apiKey: req.headers.apikey,
+		apiSecret: req.headers.apisecret
+	};
+	User.findOne(user, (err, foundUser) => {
+		if (err || !foundUser) {
+			return res.send({ success: false, message: "no user found" });
 		} else {
-			res.status(201).send({ newBooking });
+			newBooking.user = {
+				id: foundUser.id,
+				username: foundUser.username
+			};
+			Booking.create(newBooking, (err, createdBooking) => {
+				if (err) {
+					console.log(err);
+				} else {
+					res.status(201).send({ success: true, message: "booking created!", createdBooking });
+				}
+			});
 		}
 	});
 });
