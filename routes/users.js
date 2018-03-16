@@ -29,7 +29,7 @@ userRouter.get("/:user_id/getAPISecret", (req, res) => {
 });
 
 userRouter.get("/:user_id/getNewKeys", middleware.isLoggedIn, (req, res) => {
-	User.findById(req.user.id, (err, foundUser) => {
+	User.findById(req.params.user_id, (err, foundUser) => {
 		if (err) {
 			req.flash("error", "error getting new api keys");
 			res.redirect("/");
