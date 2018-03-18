@@ -47,11 +47,12 @@ userRouter.get("/:user_id/getNewKeys", middleware.isLoggedIn, (req, res) => {
           req.flash("error", "There was an error saving the user.");
           res.redirect("/");
         } else {
-          res.render("users/show", {
-            foundUser: savedUser,
-            key: savedUser.apiKey,
-            secret: savedUser.apiSecret
-          });
+          // res.render("users/show", {
+          //   foundUser: savedUser,
+          //   key: savedUser.apiKey,
+          //   secret: savedUser.apiSecret
+          // });
+          res.redirect("/users/" + savedUser.id);
         }
       });
     }
