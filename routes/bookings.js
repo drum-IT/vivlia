@@ -14,7 +14,19 @@ bookingRouter.get("/", (req, res) => {
 	});
 });
 
+bookingRouter.get("/:booking_id", (req, res) => {
+	Booking.findById(req.params.booking_id, (err, foundBooking) => {
+		if (err) {
+			res.send({ message: "error, no booking found"});
+		} else {
+			res.send({ booking: foundBooking });
+		}
+	})
+});
+
 bookingRouter.post("/", middleware.checkAPIKeys, (req, res) => {
+	console.log(req.headers);
+	console.log(req.body);
 	const newBooking = req.body;
 	const user = {
 		apiKey: req.headers.apikey,

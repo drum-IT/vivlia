@@ -6,6 +6,11 @@ const Booking = require("../models/booking");
 
 // GET ROUTES
 router.get("/", (req, res) => {
+	// eval(require("locus"));
+	// const user = {
+	// 	id: req.user.id,
+	// 	username: req.user.username
+	// }
 	Booking.find({}, (err, foundBookings) => {
 		if (err) {
 			req.flash("error", "there was an error getting all bookings");
