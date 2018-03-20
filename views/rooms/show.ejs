@@ -5,6 +5,12 @@
 				<%= foundRoom.name %>
 			</h1>
 			<p><%= foundRoom.id %></p>
+			<p>
+				<a href="/users/<%= user.id %>/rooms/<%= foundRoom.id %>/edit">Edit Room</a>
+			</p>
+			<!-- <form action="/users/<%= user.id %>/rooms/<%= foundRoom.id %>?_method=DELETE" method="POST">
+				<button>Delete Room</button>
+			</form> -->
 			<p id="guestName"></p>
 		</div>
 		<div class="col-md-8">

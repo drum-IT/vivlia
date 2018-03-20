@@ -27,6 +27,17 @@ roomRouter.get("/new", middleware.isLoggedIn, (req, res) => {
 	res.render("rooms/new");
 });
 
+roomRouter.get("/:room_id/edit", middleware.isLoggedIn, (req, res) => {
+	Room.findById(req.params.room_id, (err, foundRoom) => {
+		if (err) {
+			req.flash("error", "There was a database error while retrieving the room.");
+			res.redirect("back");
+		} else {
+			res.render("rooms/edit", { foundRoom });
+		}
+	});
+});
+
 roomRouter.get("/:room_id", middleware.isLoggedIn, (req, res) => {
 	Room.findById(req.params.room_id)
 		.populate("bookings")
@@ -57,6 +68,30 @@ roomRouter.post("/", middleware.isLoggedIn, (req, res) => {
 			res.redirect("/users/" + req.user.id + "/rooms");
 		}
 	});
+});
+
+roomRouter.put("/:room_id", (req, res) => {
+	Room.findByIdAndUpdate(req.params.room_id, req.body, (err, updatedRoom) => {
+		if (err) {
+			req.flash("error", "There was a database error while saving the room.");
+      res.redirect("back");
+		} else {
+			req.flash("success", "Room updated!");
+			res.redirect("/users/" + req.user.id + "/rooms/" + updatedRoom.id);
+		}
+	})
+});
+
+roomRouter.delete("/:room_id", middleware.isLoggedIn, (req, res) => {
+	Room.findByIdAndRemove(req.params.room_id, (err) => {
+		if (err) {
+			req.flash("error", "There was a database error while deleting the room.");
+			res.redirect("back");
+		} else {
+			req.flash("success", "Room deleted!");
+			res.redirect("/users/" + req.user.id + "/rooms");
+		}
+	})
 });
 
 module.exports = roomRouter;
