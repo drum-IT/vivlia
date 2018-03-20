@@ -9,13 +9,17 @@ const BookingSchema = new mongoose.Schema({
 	lengthOfStay: Number,
 	numberOfGuests: Number,
 	note: String,
+	room: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Room"
+	},
 	user: {
 		id: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User"
 		},
 		username: String
-	},
+	}
 });
 
 module.exports = mongoose.model("Booking", BookingSchema);

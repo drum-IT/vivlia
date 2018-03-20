@@ -2,24 +2,10 @@
 	<div class="row">
 		<div class="col-md-4">
 			<h1>
-				<%= foundUser.username %>
+				<%= foundRoom.name %>
 			</h1>
-			<p>API Key:
-				<span id="api-key">
-					<%= foundUser.apiKey %>
-				</span>
-			</p>
-			<form action="/users/<%= user.id %>/getAPISecret">
-				<label>API Secret:</label>
-				<%= foundUser.apiSecret %>
-			</form>
-			<p>
-				<form action="/users/<%= user.id %>/getNewKeys">
-					<button id="new-keys">Generate New API Keys</button>
-				</form>
-			</p>
+			<p><%= foundRoom.id %></p>
 			<p id="guestName"></p>
-			<p id="roomName"></p>
 		</div>
 		<div class="col-md-8">
 			<div class="calendar__container">
@@ -46,7 +32,7 @@
 				</div>
 			</div>
 			<div class="booking__list">
-				<% foundBookings.forEach(booking => { %>
+				<% foundRoom.bookings.forEach(booking => { %>
 					<div class="booking">
 						<p>
 							<%= booking.guestName %>
@@ -66,7 +52,7 @@
 		</div>
 	</div>
 	</div>
-	<script>let myBookings = <%- JSON.stringify(foundBookings) %>;</script>
+	<script>let myBookings = <%- JSON.stringify(foundRoom.bookings) %>;</script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	 crossorigin="anonymous"></script>
 	<script src="/js/calendar.js"></script>

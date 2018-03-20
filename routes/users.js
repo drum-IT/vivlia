@@ -3,6 +3,7 @@ const userRouter = express.Router();
 const User = require("../models/user");
 const middleware = require("../middleware");
 const Booking = require("../models/booking");
+const roomRouter = require("../routes/rooms");
 
 userRouter.get("/:user_id", middleware.isLoggedIn, (req, res) => {
   if (req.user.id !== req.params.user_id) {
@@ -47,11 +48,6 @@ userRouter.get("/:user_id/getNewKeys", middleware.isLoggedIn, (req, res) => {
           req.flash("error", "There was an error saving the user.");
           res.redirect("/");
         } else {
-          // res.render("users/show", {
-          //   foundUser: savedUser,
-          //   key: savedUser.apiKey,
-          //   secret: savedUser.apiSecret
-          // });
           res.redirect("/users/" + savedUser.id);
         }
       });

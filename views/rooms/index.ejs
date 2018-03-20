@@ -1,0 +1,10 @@
+<% include ../partials/header %>
+<div class="list">
+	<% foundRooms.forEach(room => { %>
+		<div class="list__item">
+			<a href="/users/<%= user.id %>/rooms/<%= room.id %>"><%= room.name %></a>
+		</div>
+	<% }); %>
+</div>
+<a href="/users/<%= user.id %>/rooms/new">Add New</a>
+<% include ../partials/footer %>

@@ -48,6 +48,7 @@ passport.deserializeUser(User.deserializeUser());
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/users");
 const bookingRouter = require("./routes/bookings");
+const roomRouter = require("./routes/rooms");
 
 app.use((req, res, next) => {
   res.locals.user = req.user;
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use("/bookings", bookingRouter);
+app.use("/users/:user_id/rooms", roomRouter);
 
 // start the server
 app.listen(process.env.PORT || 5000, process.env.IP, () => {

@@ -1,3 +1,4 @@
+console.log(myBookings);
 const month = document.getElementById("month");
 const calendar = document.getElementById("days");
 const checkIn = document.getElementById("checkIn");
@@ -8,6 +9,7 @@ const stayLength = document.getElementById("stayLength");
 const stayLengthInput = document.getElementById("stayLengthInput");
 const bookButton = document.getElementById("bookButton");
 const guestName = document.getElementById("guestName");
+const roomName = document.getElementById("roomName");
 const divider = document.getElementById("stay__date--divider");
 const stayCost = document.getElementById("stayCost");
 
@@ -36,9 +38,12 @@ const browseDateTime = new Date(
 );
 
 async function showBooking(e) {
+	console.log(e.target.dataset.bookingid);
   const bookingId = e.target.dataset.bookingid;
-  const data = await (await fetch("/bookings/" + bookingId)).json();
-  guestName.innerHTML = data.booking.guestName;
+	const data = await (await fetch("/bookings/" + bookingId)).json();
+	console.log(data);
+	guestName.innerHTML = data.booking.guestName;
+	roomName.innerHTML = "<a href='/users/" + data.booking.room.user.id + "/rooms/" + data.booking.room._id + "'>" + data.booking.room.name + "</a>";
 }
 
 // renders the calendar on page load
