@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 
 const RoomSchema = new mongoose.Schema({
-	// reduce this to just the id
 	user: {
-		id: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User"
-		},
-		username: String
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User"
 	},
 	bookings: [
 		{

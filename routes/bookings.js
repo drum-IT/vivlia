@@ -37,10 +37,7 @@ bookingRouter.post("/", middleware.checkAPIKeys, (req, res) => {
 		if (err || !foundUser) {
 			return res.send({ success: false, message: "no user found" });
 		} else {
-			newBooking.user = {
-				id: foundUser.id,
-				username: foundUser.username
-			};
+			newBooking.user = foundUser.id;
 			Booking.create(newBooking, (err, createdBooking) => {
 				if (err) {
 					console.log(err);

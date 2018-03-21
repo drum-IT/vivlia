@@ -6,12 +6,8 @@ const Booking = require("../models/booking");
 const Room = require("../models/room");
 
 roomRouter.get("/", middleware.isLoggedIn, (req, res) => {
-	const user = {
-		id: req.user.id,
-		username: req.user.username
-	};
 	Room.find()
-		.where("user.id")
+		.where("user")
 		.equals(req.user._id)
 		.exec((err, foundRooms) => {
 			if (err) {
@@ -55,10 +51,7 @@ roomRouter.get("/:room_id", middleware.isLoggedIn, (req, res) => {
 roomRouter.post("/", middleware.isLoggedIn, (req, res) => {
 	const newRoom = {
 		name: req.body.name,
-		user: {
-			id: req.user.id,
-			username: req.user.username
-		}
+		user: req.user.id
 	};
 	Room.create(newRoom, (err, createdRoom) => {
 		if (err) {
