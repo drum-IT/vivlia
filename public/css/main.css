@@ -5,10 +5,14 @@
   --teal: #95CBC9;
   --coral: #E8A87C;
   --lavender: #C38D9E;
-  --green: #41B3A3
+  --green: #41B3A3;
+  --white: rgba(255, 255, 255, 1);
+  --black: rgba(100, 100, 100, 1);
+  --grey: rgba()
 }
 
 html {
+  color: var(--black);
   font-size: 16px;
 }
 
@@ -26,14 +30,16 @@ body {
   grid-template-columns: 180px 1fr;
   grid-template-rows: 100%;
   height: 100vh;
+  overflow: hidden;
+  transition: all 250ms;
 }
 
 /* SIDEBAR */
 
 .sidebar {
   background: var(--green);
-  position: relative;
   width: 100%;
+  transition: all 250ms;
 }
 
 /* USER INFO */
@@ -71,7 +77,7 @@ body {
 }
 
 .user__info {
-  color: white;
+  color: var(--white);
 }
 
 /* NAV */
@@ -90,7 +96,7 @@ nav {
 
 .app__nav--link {
   align-items: center;
-  color: white;
+  color: var(--white);
   display: flex;
   height: 50px;
   justify-content: space-between;
@@ -124,4 +130,215 @@ nav {
 /* BODY CONTAINER */
 
 .container--body {
+  align-items: center;
+  background: var(--white);
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.alert {
+  border-radius: 10px;
+  color: var(--white);
+  font-size: 1rem;
+  padding: 20px;
+  position: fixed;
+  top: 20px;
+}
+
+.alert--error {
+  background: var(--orange);
+}
+
+.alert--success {
+  background: var(--green);
+}
+
+/* FORMS */
+
+.form__container {
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  padding: 10px 20px;
+}
+
+.auth__form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 20px;
+}
+
+.auth__form--title {
+  text-align: center;
+}
+
+.form__group {
+  display: grid;
+  grid-gap: 5px;
+}
+
+.form__group--input {
+  background: rgba(252, 252, 252, 1);
+  border-radius: 5px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.form__input {
+  align-items: center;
+  border-bottom: 1px solid rgba(240, 240, 240, 1);
+  color: var(--black);
+  display: flex;
+  height: 50px;
+}
+
+.input__icon {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.form__input--bottom {
+  border: none;
+}
+
+.text__input {
+  background: none;
+  border: none;
+  width: calc(100% - 63px);
+}
+
+.form__submit {
+  border: none;
+  border-radius: 5px;
+  background: var(--teal);
+  /* color: rgba(150, 150, 150, 1); */
+  color: hsla(178, 34%, 95%, 1);
+  cursor: pointer;
+  height: 50px;
+  transition: all 250ms;
+}
+
+.auth__form--links {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-areas:
+    "one two three";
+  grid-template-columns: repeat(3, 150px);
+  margin-top: 30px;
+}
+
+.auth__form__link {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.auth__form__link--one {
+ grid-area: one;
+}
+
+.auth__form__link--two {
+  grid-area: two;
+  justify-self: center;
+}
+
+.auth__form__link--three {
+  grid-area: three;
+  justify-self: right;
+}
+
+/* INFORMER  */
+
+.informer {
+  display: grid;
+  grid-template-columns: 330px auto;
+  width: 100%;
+}
+
+.item__info {
+  padding-left: 10px;
+}
+
+/* LISTS */
+
+.list a {
+  text-decoration: none;
+}
+
+.list--grid {
+  align-self: flex-start;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: center;
+  margin: 0 25px;
+  margin-top: 100px;
+  width: 100%;
+}
+
+.list__item--grid {
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  height: 300px;
+  justify-content: center;
+  padding: 50px;
+}
+
+.list__item__name {
+  align-self: flex-start;
+  color: var(--black);
+  font-size: 2.5rem;
+}
+
+.list__item__buttons {
+  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.list__item__button {
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.25rem;
+  height: 30px;
+  justify-content: center;
+  outline: none;
+  width: 50px;
+}
+
+.list__item__button--info {
+  background: var(--teal);
+}
+
+.list__item__button--edit {
+  background: var(--lavender);
+}
+
+.list__item__button--delete {
+  background: var(--orange);
+}
+
+.list__add {
+  color: var(--teal);
+  font-size: 5rem;
+}
+
+@media (max-width: 715px) {
+  .container--main {
+    grid-template-columns: 80px 1fr;
+  }
+}
+
+@media (max-width: 615px) {
+  .auth__form--links {
+    grid-template-columns: repeat(3, 75px);
+  }
 }

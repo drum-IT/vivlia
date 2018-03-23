@@ -4,6 +4,7 @@ const User = require("../models/user");
 const middleware = require("../middleware");
 const Booking = require("../models/booking");
 const roomRouter = require("../routes/rooms");
+const crypto = require("crypto");
 
 userRouter.get("/:user_id", middleware.isLoggedIn, (req, res) => {
   if (req.user.id !== req.params.user_id) {

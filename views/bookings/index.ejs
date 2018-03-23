@@ -1,12 +1,27 @@
 <% include ../partials/header %>
-<div class="list">
-	<% foundBookings.forEach(booking => { %>
-		<div class="list__item">
-			<a href="/bookings/<%= booking.id %>"><%= booking.name %></a>
+	<!-- <div class="list list--grid"> -->
+		<div class="calendar__container">
+			<div class="calendar">
+				<div class="calendar__header">
+					<button onclick="changeMonth('back')">
+						<i class="fas fa-chevron-left"></i>
+					</button>
+					<h3 id="month" class="month"></h3>
+					<button onclick="changeMonth('forward')">
+						<i class="fas fa-chevron-right"></i>
+					</button>
+				</div>
+				<div class="calendar__week">
+					<div class="weekday">Su</div>
+					<div class="weekday">Mo</div>
+					<div class="weekday">Tu</div>
+					<div class="weekday">We</div>
+					<div class="weekday">Th</div>
+					<div class="weekday">Fr</div>
+					<div class="weekday">Sa</div>
+				</div>
+				<div id="days" class="calendar__days"> </div>
+			</div>
 		</div>
-	<% }); %>
-	<div class="list__item">
-		<a href="/bookings/new">Add New</a>
-	</div>
-</div>
-<% include ../partials/footer %>
+	<!-- </div> -->
+	<% include ../partials/footer %>

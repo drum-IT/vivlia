@@ -80,6 +80,8 @@ function renderCalendar(date) {
   dayCells[0] = `<div id="${browseDateTime.getTime()}" class="day" style="grid-column: ${date.getDay() +
     1} / ${date.getDay() + 2}"><div class="date">1</div></div>`;
   calendar.innerHTML = dayCells.join("");
+  // const ch = $(".calendar__container").height();
+  // $(".calendar__container").css({ width: ch + "px" });
   const cw = $(".day").width();
   $(".day").css({ height: cw + "px" });
   let counter = 2;
