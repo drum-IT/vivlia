@@ -147,7 +147,7 @@ router.post("/forgot", async (req, res) => {
           to: user.email,
           from: process.env.GMAIL_USER,
           subject: "Vivlio Password Reset Request",
-          text: `http://${req.headers.host}/reset/${token}`
+          text: `https://${req.headers.host}/reset/${token}`
         };
         smtpTransport.sendMail(mailOptions, err => {
           console.log("mail sent");

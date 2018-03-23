@@ -67,6 +67,6 @@ app.listen(process.env.PORT || 5000, process.env.IP, () => {
 	console.log("Vivlia Server has Started!", process.env.PORT || 5000);
 });
 
-setInterval(() => {
-	http.get("http://vivlia.herokuapp.com");
-}, 300000);
+// setInterval(() => {
+// 	http.get("http://vivlia.herokuapp.com");
+// }, 300000);
