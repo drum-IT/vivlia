@@ -1,8 +1,8 @@
 <% include ../partials/header %>
 	<div class="row">
 		<div style="width: 30%; margin: 35px auto;">
-			<h1 style="text-align: center">Create a New Room</h1>
-			<form action="/rooms" method="POST">
+			<h1 style="text-align: center">Create a New Booking</h1>
+			<form action="/bookings" method="POST">
 				<div class="form-group">
 					<input class="form-control" type="text" name="name" placeholder="name">
 				</div>
@@ -10,7 +10,7 @@
 					<button class="btn btn-lg btn-primary btn-block">Submit</button>
 				</div>
 			</form>
-			<a href="/users/<%= user.id %>/rooms">Go Back</a>
+			<a href="/bookings">Go Back</a>
 		</div>
 	</div>
 	<% include ../partials/footer %>

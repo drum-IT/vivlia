@@ -1,12 +1,12 @@
 <% include ../partials/header %>
 <div class="list">
-	<% foundRooms.forEach(room => { %>
+	<% foundBookings.forEach(booking => { %>
 		<div class="list__item">
-			<a href="/rooms/<%= room.id %>"><%= room.name %></a>
+			<a href="/bookings/<%= booking.id %>"><%= booking.name %></a>
 		</div>
 	<% }); %>
 	<div class="list__item">
-		<a href="/rooms/new">Add New</a>
+		<a href="/bookings/new">Add New</a>
 	</div>
 </div>
 <% include ../partials/footer %>

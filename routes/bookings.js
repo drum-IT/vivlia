@@ -10,7 +10,7 @@ bookingRouter.get("/", (req, res) => {
 		if (err) {
 			console.log("database error during GET all", err);
 		} else {
-			res.status(200).send({ foundBookings });
+			res.render("bookings/index", { foundBookings, page: "bookings" });
 		}
 	});
 });

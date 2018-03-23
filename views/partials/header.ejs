@@ -3,63 +3,58 @@
 
 	<head>
 		<link rel="stylesheet" href="/css/modern-normalize.css">
-		<link rel="stylesheet" href="/css/bootstrapCSS/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
 		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/calendar.css">
 		<title>Booking App</title>
 	</head>
 
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="/">Booking App</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="/">Home</a>
-					</li>
-					<% if (!user) { %>
-						<% } else { %>
-							<li class="nav-item">
-								<a class="nav-link" href="/users/<%= user.id %>/rooms">My Rooms</a>
-							</li>
+		<div class="container--main">
+			<div class="sidebar">
+				<% if (!user) { %>
+				<div class="app__nav">
+					<a class="app__nav--link <%= page === 'login' ? 'app__nav--active' : '' %>" href="/login">Log In</a>
+					<a class="app__nav--link <%= page === 'register' ? 'app__nav--active' : '' %>" href="/register">Sign up</a>
+				</div>
+				<% } else { %>
+				<div class="user__nav">
+					<a href="/users/<%= user.id %>">
+						<h1 class="user__initial"><%= user.username.substring(0, 1).toUpperCase() %></h1>
+						<div class="user__info">
+							<p><%= user.username %></p>
+						</div>
+					</a>
+				</div>
+				<nav>
+					<div class="app__nav nav--section">
+						<a href="/rooms" class="app__nav--link <%= page === 'rooms' ? 'app__nav--active' : '' %>">
+							Rooms
+							<% if (page === "rooms") { %>
+							<i class="fas fa-caret-left"></i>
 							<% } %>
-				</ul>
-				<ul class="navbar-nav justify-content-end">
-					<% if (!user) { %>
-						<li class="nav-item float-right">
-							<a class="nav-link" href="/login">Login</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/register">Sign Up</a>
-						</li>
-						<% } else { %>
-							<li class="nav-item">
-								<a class="nav-link" href="/users/<%= user.id %>">Signed in as
-									<%= user.username %>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/logout">Logout</a>
-							</li>
+						</a>
+						<a href="/bookings" class="app__nav--link <%= page === 'bookings' ? 'app__nav--active' : '' %>">
+							Bookings
+							<% if (page === "bookings") { %>
+							<i class="fas fa-caret-left"></i>
 							<% } %>
-				</ul>
+						</a>
+					</div>
+					<div class="settings__nav nav--section">
+						<a href="/logout" class="app__nav--link">Logout</a>
+					</div>
+				</nav>
+				<% } %>
 			</div>
-		</nav>
-		<% if (error && error.length > 0) { %>
-			<div class="container">
-				<div class="alert alert-danger" role="alert">
+			<div class="container--body">
+			<% if (error && error.length > 0) { %>
+				<div class="alert allert--error">
 					<%= error %>
 				</div>
-			</div>
 			<% } %>
-				<% if (success && success.length > 0) { %>
-					<div class="container">
-						<div class="alert alert-success" role="alert">
-							<%= success %>
-						</div>
-					</div>
-					<% } %>
-						<div class="container">
+			<% if (success && success.length > 0) { %>
+				<div class="alert alert--success">
+					<%= success %>
+				</div>
+			<% } %>

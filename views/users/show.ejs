@@ -18,56 +18,9 @@
 					<button id="new-keys">Generate New API Keys</button>
 				</form>
 			</p>
-			<p id="guestName"></p>
-			<p id="roomName"></p>
 		</div>
 		<div class="col-md-8">
-			<div class="calendar__container">
-				<div class="calendar">
-					<div class="calendar__header">
-						<button onclick="changeMonth('back')">
-							<i class="fas fa-chevron-left"></i>
-						</button>
-						<h3 id="month" class="month"></h3>
-						<button onclick="changeMonth('forward')">
-							<i class="fas fa-chevron-right"></i>
-						</button>
-					</div>
-					<div class="calendar__week">
-						<div class="weekday">Su</div>
-						<div class="weekday">Mo</div>
-						<div class="weekday">Tu</div>
-						<div class="weekday">We</div>
-						<div class="weekday">Th</div>
-						<div class="weekday">Fr</div>
-						<div class="weekday">Sa</div>
-					</div>
-					<div id="days" class="calendar__days"> </div>
-				</div>
-			</div>
-			<div class="booking__list">
-				<% foundBookings.forEach(booking => { %>
-					<div class="booking">
-						<p>
-							<%= booking.guestName %>
-						</p>
-						<p>
-							<%= moment(booking.checkInTime).format('MMMM Do YYYY, h:mm:ss a'); %>
-						</p>
-						<p>
-							<%= moment(booking.checkOutTime).format('MMMM Do YYYY, h:mm:ss a'); %>
-						</p>
-						<p>
-							<%= booking.lengthOfStay %>
-						</p>
-					</div>
-					<% }); %>
-			</div>
 		</div>
 	</div>
 	</div>
-	<script>let myBookings = <%- JSON.stringify(foundBookings) %>;</script>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	 crossorigin="anonymous"></script>
-	<script src="/js/calendar.js"></script>
 	<% include ../partials/footer %>

@@ -7,25 +7,18 @@ const roomRouter = require("../routes/rooms");
 
 userRouter.get("/:user_id", middleware.isLoggedIn, (req, res) => {
   if (req.user.id !== req.params.user_id) {
-    req.flash("error", "You can't do that!");
+    req.flash("error", "You can't view another user's account.");
     res.redirect("back");
   } else {
     User.findById(req.params.user_id, (err, foundUser) => {
       if (err) {
-        req.flash("error", "A database error has occurred.");
+        req.flash("error", "User not found.");
         res.redirect("back");
       } else if (!foundUser) {
         req.flash("error", "That user no longer exists.");
         res.redirect("back");
       } else {
-        Booking.find({}, (err, foundBookings) => {
-          if (err) {
-            req.flash("error", "there was an error getting all bookings");
-            res.redirect("back");
-          } else {
-            res.render("users/show", { foundUser, foundBookings });
-          }
-        });
+        res.render("users/show", { foundUser, page: "user" });
       }
     });
   }
