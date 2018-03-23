@@ -65,8 +65,29 @@ router.post("/register", (req, res) => {
     passport.authenticate("local")(req, res, () => {
       req.flash(
         "success",
-        `You have successfully signed up, ${newUser.username}!`
+        `Welcome to Vivlio, ${newUser.username}!`
       );
+      const smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_PASS
+        }
+      });
+      const mailOptions = {
+        to: user.email,
+        from: process.env.GMAIL_USER,
+        subject: "Welcome to Vivlio!",
+        text: "Hi " + newUser.username + "," + "\n\n" + "Thanks for signing up for Vivlio!"
+      };
+      smtpTransport.sendMail(mailOptions, err => {
+        console.log("mail sent");
+        // req.flash(
+        //   "success",
+        //   "Please check your email for password reset instructions."
+        // );
+        done(err, "done");
+      });
       res.redirect("/");
     });
   });
@@ -149,64 +170,67 @@ router.post("/forgot", async (req, res) => {
 });
 
 router.post("/reset/:token", (req, res) => {
-  async.waterfall([
-    done => {
-      User.findOne(
-        {
-          resetPasswordToken: req.params.token,
-          resetPasswordExpires: { $gt: Date.now() }
-        },
-        (err, user) => {
-          if (err) {
-            req.flash("error", "There was an error finding the user.");
-            return res.redirect("/forgot");
-          } else if (!user) {
-            req.flash("error", "Password reset token invalid or expired.");
-            return res.redirect("/forgot");
-          } else if (req.body.password === req.body.confirm) {
-            user.setPassword(req.body.password, err => {
-              user.resetPasswordToken = undefined;
-              user.resetPasswordExpires = undefined;
-              user.save(err => {
-                req.logIn(user, err => {
-                  done(err, user);
+  async.waterfall(
+    [
+      done => {
+        User.findOne(
+          {
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+          },
+          (err, user) => {
+            if (err) {
+              req.flash("error", "There was an error finding the user.");
+              return res.redirect("/forgot");
+            } else if (!user) {
+              req.flash("error", "Password reset token invalid or expired.");
+              return res.redirect("/forgot");
+            } else if (req.body.password === req.body.confirm) {
+              user.setPassword(req.body.password, err => {
+                user.resetPasswordToken = undefined;
+                user.resetPasswordExpires = undefined;
+                user.save(err => {
+                  req.logIn(user, err => {
+                    done(err, user);
+                  });
                 });
               });
-            });
-          } else {
-            req.flash("error", "Passwords do not match.");
-            return res.redirect("back");
+            } else {
+              req.flash("error", "Passwords do not match.");
+              return res.redirect("back");
+            }
           }
-        }
-      );
-    },
-    (user, done) => {
-      const smtpTransport = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASS
-        }
-      });
-      const mailOptions = {
-        to: user.email,
-        from: process.env.GMAIL_USER,
-        subject: "Vivlio Password Reset Confirmation",
-        text: `Vivlio password for ${user.email} has been changed.`
-      };
-      smtpTransport.sendMail(mailOptions, err => {
-        req.flash("success", "Your password has been reset!");
-        done(err);
-      });
+        );
+      },
+      (user, done) => {
+        const smtpTransport = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASS
+          }
+        });
+        const mailOptions = {
+          to: user.email,
+          from: process.env.GMAIL_USER,
+          subject: "Vivlio Password Reset Confirmation",
+          text: `Vivlio password for ${user.email} has been changed.`
+        };
+        smtpTransport.sendMail(mailOptions, err => {
+          req.flash("success", "Your password has been reset!");
+          done(err);
+        });
+      }
+    ],
+    err => {
+      if (err) {
+        req.flash("error", "there was an error!");
+        res.redirect("back");
+      } else {
+        res.redirect("/");
+      }
     }
-  ], err => {
-    if (err) {
-      req.flash("error", "there was an error!");
-      res.redirect("back");
-    } else {
-      res.redirect("/");
-    }
-  });
+  );
 });
 
 module.exports = router;

@@ -204,8 +204,11 @@ nav {
 .text__input {
   background: none;
   border: none;
+  outline: none;
   width: calc(100% - 63px);
 }
+
+/* .text__input */
 
 .form__submit {
   border: none;
