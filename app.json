@@ -1,0 +1,35 @@
+{
+  "name": "vivlia",
+  "scripts": {
+  },
+  "env": {
+    "GMAIL_PASS": {
+      "required": true
+    },
+    "GMAIL_USER": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    },
+    "NODE_ENV": {
+      "required": true
+    },
+    "SESSION_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
