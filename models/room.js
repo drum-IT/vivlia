@@ -11,7 +11,8 @@ const RoomSchema = new mongoose.Schema({
 			ref: "Booking"
 		}
 	],
-	name: String
+	name: String,
+	notes: String
 });
 
 module.exports = mongoose.model("Room", RoomSchema);

@@ -1,13 +1,10 @@
 <% include ../partials/header %>
-<div class="container--body">
 	<div class="informer">
 		<div class="item__info">
 			<h3>
-				Name: <%= foundRoom.name %>
+				<%= foundRoom.name %>
 			</h3>
-			<p>
-				ID: <%= foundRoom.id %>
-			</p>
+			<p><%= foundRoom.notes %></p>
 		</div>
 		<div class="calendar__container">
 			<div class="calendar">

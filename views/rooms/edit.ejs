@@ -1,8 +1,7 @@
 <% include ../partials/header %>
-<div class="container--body">
   <div class="form__container">
-    <form class="auth__form" action="/rooms/<%= foundRoom.id %>?_method=PUT" method="POST">
-      <h1 class="auth__form--title">Update Room</h1>
+    <form class="form" action="/rooms/<%= foundRoom.id %>?_method=PUT" method="POST">
+      <h1 class="form--title">Update Room</h1>
       <div class="form__group form__group--input">
         <div class="form__input form__input--bottom">
           <i class="fas fa-home input__icon"></i>
@@ -11,8 +10,8 @@
       </div>
       <input class="form__submit" type="submit" value="Update Room">
     </form>
-    <p class="auth__form--links">
-      <a class="auth__form__link auth__form__link--one" href="/rooms/<%= foundRoom.id %>">
+    <p class="form--links">
+      <a class="form__link form__link--one" href="/rooms/<%= foundRoom.id %>">
         Go Back
       </a>
     </p>
