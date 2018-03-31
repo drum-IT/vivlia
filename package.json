@@ -1,7 +1,7 @@
 {
-  "name": "express-starter",
+  "name": "Vivlia",
   "version": "1.0.0",
-  "description": "Starter files for EJS express app with mongo user auth.",
+  "description": "A booking application.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

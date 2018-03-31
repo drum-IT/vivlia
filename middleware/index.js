@@ -16,7 +16,7 @@ middleware.verifyRoomOwnership = (req, res, next) => {
       req.flash("error", "An error occurred while finding the room.");
       res.redirect("back");
     } else {
-      if (foundRoom.user.equals(req.user._id)) {
+      if (foundRoom.author.equals(req.user._id)) {
         return next();
       } else {
         req.flash("error","That room does not belong to you.");

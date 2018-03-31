@@ -3,22 +3,26 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<link rel="stylesheet" href="/css/modern-normalize.css">
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,600" rel="stylesheet">
 		<link rel="stylesheet" href="/css/main.css">
 		<link rel="stylesheet" href="/css/calendar.css">
 		<title>Vivlio</title>
+		<script src="/js/main.js" async defer></script>
 	</head>
 
-	<body>
+	<body style="display:none" onload="document.body.removeAttribute('style');">
 		<div class="container--main">
+			<div class="sidebar__icon">
+				<i class="fas fa-chevron-circle-right sidebar__toggle"></i>
+			</div>
 			<div class="sidebar">
 				<% if (!user) { %>
-				<div class="app__nav">
+				<div class="app__nav sidebar--content">
 					<a class="app__nav--link <%= typeof page !== 'undefined' && page === 'login' ? 'app__nav--active' : '' %>" href="/login">
-						Log In
+						Sign In
 						<% if (typeof page !== 'undefined' && page === "login") { %>
 							<i class="fas fa-caret-left"></i>
 						<% } %>
@@ -31,7 +35,7 @@
 					</a>
 				</div>
 				<% } else { %>
-				<div class="user__nav <%= typeof page !== 'undefined' && page === 'user' ? 'app__nav--active' : '' %>">
+				<div class="sidebar--content user__nav <%= typeof page !== 'undefined' && page === 'user' ? 'app__nav--active' : '' %>">
 					<a href="/users/<%= user.id %>">
 						<h1 class="user__initial"><%= user.username.substring(0, 1).toUpperCase() %></h1>
 						<div class="user__info">
@@ -39,7 +43,7 @@
 						</div>
 					</a>
 				</div>
-				<nav>
+				<nav class="sidebar--content">
 					<div class="app__nav nav--section">
 						<a href="/rooms" class="app__nav--link <%= typeof page !== 'undefined' && page === 'rooms' ? 'app__nav--active' : '' %>">
 							Rooms
@@ -60,14 +64,4 @@
 				</nav>
 				<% } %>
 			</div>
-			<div class="container--body">
-			<% if (error && error.length > 0) { %>
-				<div class="alert alert--error">
-					<%= error %>
-				</div>
-			<% } %>
-			<% if (success && success.length > 0) { %>
-				<div class="alert alert--success">
-					<%= success %>
-				</div>
-			<% } %>
+			<div class="container--content">

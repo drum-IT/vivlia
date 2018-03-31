@@ -13,7 +13,7 @@ const BookingSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Room"
 	},
-	user: {
+	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User"
 	}

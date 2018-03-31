@@ -4,15 +4,16 @@
 			<div class="list__item--grid">
 				<a class="list__item__name" href="/rooms/<%= room.id %>"><%= room.name %></a>
 				<div class="list__item__buttons">
-					<a class="list__item__button list__item__button--info" href="/rooms/
-					<%= room.id %>">
-						<i class="fas fa-info input__icon"></i>
+					<a class="list__item__button list__item__button--info" href="/rooms/<%= room.id %>">
+						<i class="fas fa-info list__item__icon"></i>
 					</a>
 					<a class="list__item__button list__item__button--edit" href="/rooms/<%= room.id %>/edit">
-						<i class="fas fa-edit input__icon"></i>
+						<i class="fas fa-edit list__item__icon"></i>
 					</a>
 					<form action="/rooms/<%= room.id %>?_method=DELETE" method="POST">
-						<button class="list__item__button list__item__button--delete"><i class="fas fa-trash-alt input__icon"></i></button>
+						<button class="list__item__button list__item__button--delete">
+							<i class="fas fa-trash-alt list__item__icon"></i>
+						</button>
 					</form>
 				</div>
 			</div>
@@ -21,4 +22,5 @@
 			<a class="list__add" href="/rooms/new"><i class="fas fa-plus"></i></a>
 		</div>
 	</div>
+	<div class="container--spacer"></div>
 <% include ../partials/footer %>
