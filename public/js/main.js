@@ -1,4 +1,3 @@
-console.log("hello world");
 const sidebarToggle = document.querySelector(".sidebar__icon");
 sidebarToggle.addEventListener("click", ev => {
 	const sidebar = document.querySelector(".sidebar");
