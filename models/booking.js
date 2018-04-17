@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const BookingSchema = new mongoose.Schema({
 	checkInDate: Date,
@@ -11,12 +11,12 @@ const BookingSchema = new mongoose.Schema({
 	note: String,
 	room: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "Room"
+		ref: 'Room'
 	},
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "User"
+		ref: 'User'
 	}
 });
 
-module.exports = mongoose.model("Booking", BookingSchema);
+module.exports = mongoose.model('Booking', BookingSchema);
